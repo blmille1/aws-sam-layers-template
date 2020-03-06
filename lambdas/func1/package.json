@@ -1,0 +1,12 @@
+{
+  "name": "reference_architecture",
+  "version": "1.0.0",
+  "description": "A reference project showing how to structure your code and use SAM to deploy and debug it.",
+  "main": "app.js",
+  "repository": "",
+  "author": "Craig Roffers",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha tests/unit/"
+  }
+}

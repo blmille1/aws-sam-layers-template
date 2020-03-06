@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  A simple way of sharing code among various lambda functions.
+  
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: nodejs12.x
+    Environment:
+      Variables:
+        AWS: true
+    
+Resources:
+  Func1:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: lambdas/func1/
+      Handler: app.lambdaHandler
+      Events:
+        HelloWorld:
+          Type: Api 
+          Properties:
+            Path: /func1
+            Method: get
+  Func2:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: lambdas/func2/
+      Handler: app.lambdaHandler
+      Layers:
+        - !Ref CommonLayer
+      Events:
+        HelloWorld:
+          Type: Api 
+          Properties:
+            Path: /func2
+            Method: get
+  CommonLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+        LayerName: common-dependencies
+        Description: Common dependencies
+        ContentUri: layers/layer1/
+        CompatibleRuntimes:
+          - nodejs12.x
+        LicenseInfo: 'MIT'
+        RetentionPolicy: Retain
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  Func1Api:
+    Description: "API Gateway endpoint URL for Prod stage for Func1"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/func1/"
+  Func1:
+    Description: "Func1 ARN"
+    Value: !GetAtt Func1.Arn
+  Func1IamRole:
+    Description: "Implicit IAM Role created for Func1"
+    Value: !GetAtt Func1Role.Arn
