@@ -4,7 +4,7 @@
   "description": "This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha lambdas/func1/tests/unit lambdas/func2/tests/unit"
   },
   "author": "",
   "license": "ISC",
