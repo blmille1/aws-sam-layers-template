@@ -63,6 +63,14 @@ aws-sam-layers-template$ curl http://localhost:3000/func1
 aws-sam-layers-template$ curl http://localhost:3000/func2
 ```
 
+## Debugging your lambda functions
+
+```bash
+aws-sam-layers-template$ sam local invoke Func1 --debug-port 5858 --event events/event.json
+aws-sam-layers-template$ sam local invoke Func2 --debug-port 5858 --event events/event.json
+```
+Once the local invoke is ready, you can attach the debugger by going to the debug tab in VS Code, selecting "Attach to Func1 or 2", and clicking the play button.  You will want to have a breakpoint set.  When it hits your breakpoint, you should be able to debug the code.
+
 ## Add a resource to your application
 The application template uses AWS Serverless Application Model (AWS SAM) to define application resources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application resources such as functions, triggers, and APIs. For resources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
 

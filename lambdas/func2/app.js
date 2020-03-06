@@ -19,8 +19,8 @@ exports.lambdaHandler = async (event, context) => {
 };
 
 if(require.main === module) {
-        (async () => {
-            var result = await exports.lambdaHandler();
-            console.log(result);
-        })();
-    } 
+    (async () => {
+        var result = await exports.lambdaHandler();
+        console.log(result);
+    })();
+}
