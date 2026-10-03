@@ -103,10 +103,12 @@ aws-sam-layers-template$ sam logs -n Func2 --stack-name aws-sam-layers-template 
 
 ## Unit tests
 
-Tests are defined in the `lambdas/*/tests` folders in this project. Use NPM to install the [Mocha test framework](https://mochajs.org/) and run unit tests.
+Tests are defined in the `lambdas/*/tests` folders in this project. Install the test and layer dependencies, then run the tests:
 
 ```bash
-aws-sam-layers-template$ npm run test
+aws-sam-layers-template$ npm ci
+aws-sam-layers-template$ npm ci --prefix layers/layer1/nodejs
+aws-sam-layers-template$ npm test
 ```
 
 ## Cleanup

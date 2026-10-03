@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install layer dependencies for unit tests
+        run: npm ci --prefix layers/layer1/nodejs
+
       - name: Run tests
         run: npm test
 
