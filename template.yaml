@@ -6,7 +6,7 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Runtime: nodejs12.x
+    Runtime: nodejs24.x
     Environment:
       Variables:
         AWS: true
@@ -43,9 +43,11 @@ Resources:
         Description: Common dependencies
         ContentUri: layers/layer1/
         CompatibleRuntimes:
-          - nodejs12.x
+          - nodejs24.x
         LicenseInfo: 'MIT'
         RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: makefile
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

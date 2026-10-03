@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -27,3 +27,18 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Set up AWS SAM CLI
+        uses: aws-actions/setup-sam@v3
+
+      - name: Build SAM application
+        run: sam build
+
+      - name: Verify layer dependencies are included
+        run: node -e "require('./.aws-sam/build/CommonLayer/nodejs/common.js')"
+
+      - name: Invoke Func1 in the Lambda runtime
+        run: sam local invoke Func1 --event events/event.json
+
+      - name: Invoke Func2 with the built layer
+        run: sam local invoke Func2 --event events/event.json

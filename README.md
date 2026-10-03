@@ -15,8 +15,8 @@ The Serverless Application Model Command Line Interface (SAM CLI) is an extensio
 
 To use the SAM CLI, you need the following tools.
 
-* SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* Node.js - [Install Node.js 10](https://nodejs.org/en/), including the NPM package management tool.
+* SAM CLI - [Install the current SAM CLI release](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html), which supports the `nodejs24.x` runtime.
+* Node.js 24 - [Install Node.js](https://nodejs.org/en/), including the NPM package management tool.
 * Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
 
 To build and deploy your application for the first time, run the following in your shell:
@@ -38,13 +38,17 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 
 ## Use the SAM CLI to build and test locally
 
-Build your application with the `sam build` command.
+Build your application with the `sam build` command. This also installs the common layer's dependencies from
+`layers/layer1/nodejs/package-lock.json`, so the layer is ready for local invocation and deployment.
 
 ```bash
 aws-sam-layers-template$ sam build
 ```
 
-The SAM CLI installs dependencies defined in each of the lambda function folders using each's `package.json`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+SAM installs dependencies defined in each Lambda function folder using its `package.json`. The common
+layer is also built: its `Makefile` runs `npm ci` from the lockfile and puts dependencies under
+`nodejs/node_modules` in the build artifact. No separate `npm install` step is needed for the layer.
+The build artifacts are saved in the `.aws-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
