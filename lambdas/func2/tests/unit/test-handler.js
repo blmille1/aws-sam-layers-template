@@ -17,12 +17,12 @@ describe('Tests func2', function () {
         let response = JSON.parse(result.body);
 
         expect(response).to.be.an('object');
-        expect(response.message).to.be.equal("temp: 212");
+        expect(response.message).to.be.equal("temp1: 212, temp2: 212");
     });
 
 
     it('test tuc', async () => {
 
-        expect(converter.tuc()).to.be.equal("temp: 212");
+        expect(converter.tuc()).to.be.equal("temp1: 212, temp2: 212");
     });
 });
