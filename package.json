@@ -4,6 +4,7 @@
   "description": "This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.",
   "main": "index.js",
   "scripts": {
+    "build": "sam build",
     "test": "mocha lambdas/func1/tests/unit lambdas/func2/tests/unit",
     "debug:func1": "sam local invoke Func1 --debug-port 5858 --event events/event.json",
     "debug:func2": "sam local invoke Func2 --debug-port 5858 --event events/event.json",

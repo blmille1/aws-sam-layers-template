@@ -35,7 +35,7 @@ jobs:
         uses: aws-actions/setup-sam@v3
 
       - name: Build SAM application
-        run: sam build
+        run: npm run build
 
       - name: Verify layer dependencies are included
         run: node -e "require('./.aws-sam/build/CommonLayer/nodejs/common.js')"

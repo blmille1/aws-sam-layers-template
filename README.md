@@ -22,7 +22,7 @@ To use the SAM CLI, you need the following tools.
 To build and deploy your application for the first time, run the following in your shell:
 
 ```bash
-sam build
+npm run build
 sam deploy --guided
 ```
 
@@ -38,11 +38,11 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 
 ## Use the SAM CLI to build and test locally
 
-Build your application with the `sam build` command. This also installs the common layer's dependencies from
+Build your application with `npm run build`. This runs `sam build` and also installs the common layer's dependencies from
 `layers/layer1/nodejs/package-lock.json`, so the layer is ready for local invocation and deployment.
 
 ```bash
-aws-sam-layers-template$ sam build
+aws-sam-layers-template$ npm run build
 ```
 
 SAM installs dependencies defined in each Lambda function folder using its `package.json`. The common
